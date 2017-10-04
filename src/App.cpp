@@ -1,7 +1,7 @@
 
-#include <StarFighter/Components/CombatComponent.h>
-#include <elastic/views/ColorView.h>
-#include <elastic/views/LabelView.h>
+#include "StarFighter/Components/CombatComponent.h"
+#include "elastic/views/ColorView.h"
+#include "elastic/views/LabelView.h"
 #include "StarFighter/UIContext.h"
 #include "StarFighter/World.h"
 #include "canvas/app.h"
