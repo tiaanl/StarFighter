@@ -5,7 +5,7 @@
 #include "nucleus/types.h"
 
 struct CollisionComponent {
-    F32 collisionRadius{0.f};
+  F32 collisionRadius{0.f};
 };
 
 #endif  // STAR_FIGHTER_COMPONENTS_COLLISION_COMPONENT_H_

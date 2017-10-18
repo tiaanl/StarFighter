@@ -7,7 +7,7 @@
 
 class UIContext : public el::Context {
 public:
-    ca::Font* getFont(const std::string& name) override;
+  ca::Font* getFont(const std::string& name) override;
 };
 
 #endif  // STAR_FIGHTER_UI_CONTEXT_H_

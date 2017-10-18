@@ -5,14 +5,14 @@
 #include "junctions/entity_manager.h"
 
 struct InputEvent {
-    ju::EntityId id;
+  ju::EntityId id;
 
-    enum Action {
-        ActionStartFiring,
-        ActionStopFiring,
-    } action;
+  enum Action {
+    ActionStartFiring,
+    ActionStopFiring,
+  } action;
 
-    InputEvent(ju::EntityId id, Action action) : id(id), action(action) {}
+  InputEvent(ju::EntityId id, Action action) : id(id), action(action) {}
 };
 
 #endif  // STAR_FIGHTER_EVENTS_INPUT_EVENT_H_

@@ -6,13 +6,13 @@
 #include "nucleus/types.h"
 
 struct PositionComponent {
-    // Current position of the entity.
-    ca::Vec2 pos;
+  // Current position of the entity.
+  ca::Vec2 pos;
 
-    // Current rotation of the entity.
-    F32 rot;
+  // Current direction the entity is facing in degrees.  (0.f..360.f)
+  F32 direction;
 
-    PositionComponent(const ca::Vec2& pos = ca::Vec2{}, F32 rot = 0.f) : pos(pos), rot(rot) {}
+  explicit PositionComponent(const ca::Vec2& pos = ca::Vec2{}, F32 rot = 0.f) : pos(pos), direction(direction) {}
 };
 
 #endif  // STAR_FIGHTER_COMPONENTS_POSITION_COMPONENT_H_

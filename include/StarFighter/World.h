@@ -18,54 +18,64 @@
 
 class World : public ca::MouseEventHandlerInterface, public ca::KeyboardEventHandlerInterface {
 public:
-    World();
-    ~World();
+  World();
+  ~World();
 
-    bool create();
+  bool create();
 
+#if 0
     ju::Entity* getPlayerEntity() {
         return m_entities.getEntity(m_starFighterEntityId);
     }
+#endif  // 0
 
-    void setViewportSize(const ca::Size<U32>& viewportSize);
-    void update(ca::Canvas* canvas, const ca::Size<U32>& viewportSize, F32 adjustment);
+  void setViewportSize(const ca::Size<U32>& viewportSize);
+  void update(ca::Canvas* canvas, const ca::Size<U32>& viewportSize, F32 adjustment);
 
-    void onMouseMoved(const ca::MouseEvent& evt) override;
-    bool onMousePressed(const ca::MouseEvent& evt) override;
-    void onMouseReleased(const ca::MouseEvent& evt) override;
-    void onMouseWheel(const ca::MouseWheelEvent& evt) override;
+  void onMouseMoved(const ca::MouseEvent& evt) override;
+  bool onMousePressed(const ca::MouseEvent& evt) override;
+  void onMouseReleased(const ca::MouseEvent& evt) override;
+  void onMouseWheel(const ca::MouseWheelEvent& evt) override;
 
-    void onKeyPressed(const ca::KeyEvent& evt) override;
-    void onKeyReleased(const ca::KeyEvent& evt) override;
+  void onKeyPressed(const ca::KeyEvent& evt) override;
+  void onKeyReleased(const ca::KeyEvent& evt) override;
 
 private:
-    nu::ScopedPtr<ca::Texture> createTexture(const nu::FilePath& filename);
+  nu::ScopedPtr<ca::Texture> createTexture(const nu::FilePath& filename);
 
+#if 0
     bool spawnStarFighter();
-    bool spawnMouseCursor();
-    bool spawnEnemyFighter(const ca::Vec2& pos);
+#endif  // 0
 
-    ca::Size<U32> m_viewportSize;
+  bool spawnMouseCursor();
+  bool spawnEnemyFighter(const ca::Vec2& pos);
+  bool spawnAsteroid(const ca::Vec2& pos, F32 direction);
+  bool spawnBarge(const ca::Vec2& pos);
 
-    Camera m_camera;
+  ca::Size<U32> m_viewportSize;
 
-    ca::Pos<I32> m_mousePosition;
+  Camera m_camera;
 
-    ju::EntityManager m_entities;
-    ju::SystemManager m_systems;
+  ca::Pos<I32> m_mousePosition;
 
-    // Some textures.
-    nu::ScopedPtr<ca::Texture> m_mousePointerTexture;
-    nu::ScopedPtr<ca::Texture> m_starFighterTexture;
-    nu::ScopedPtr<ca::Texture> m_enemyFighterTexture;
-    nu::ScopedPtr<ca::Texture> m_movementTargetTexture;
+  ju::EntityManager m_entities;
+  ju::SystemManager m_systems;
 
-    ju::EntityId m_starFighterEntityId{ju::kInvalidEntityId};
-    ju::EntityId m_mousePointerEntityId{ju::kInvalidEntityId};
+  // Some textures.
+  nu::ScopedPtr<ca::Texture> m_mousePointerTexture;
+  nu::ScopedPtr<ca::Texture> m_starFighterTexture;
+  nu::ScopedPtr<ca::Texture> m_enemyFighterTexture;
+  nu::ScopedPtr<ca::Texture> m_movementTargetTexture;
+  nu::ScopedPtr<ca::Texture> m_asteroidTexture;
+  nu::ScopedPtr<ca::Texture> m_bargeTexture;
 
-    bool m_settingStarFighterPos{false};
+  // ju::EntityId m_starFighterEntityId{ju::kInvalidEntityId};
+  ju::EntityId m_mousePointerEntityId{ju::kInvalidEntityId};
 
-    DISALLOW_COPY_AND_ASSIGN(World);
+  bool m_settingCameraPos{false};
+  ca::Pos<I32> m_cameraPosStartPos;
+
+  DISALLOW_COPY_AND_ASSIGN(World);
 };
 
 #endif  // STAR_FIGHTER_WORLD_H_
