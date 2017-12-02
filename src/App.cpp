@@ -1,8 +1,8 @@
 
+#include "canvas/app.h"
 #include "StarFighter/Components/CombatComponent.h"
 #include "StarFighter/UIContext.h"
 #include "StarFighter/World.h"
-#include "canvas/app.h"
 #include "canvas/math/transform.h"
 #include "elastic/views/ColorView.h"
 #include "elastic/views/LabelView.h"
@@ -79,18 +79,14 @@ public:
     // Render the world.
     m_world->update(canvas, m_viewportSize, adjustment);
 
-#if 0
-        ju::Entity* starFighter = m_world->getPlayerEntity();
-        auto combat = starFighter->getComponent<CombatComponent>();
+    ju::Entity* starFighter = m_world->getPlayerEntity();
+    auto combat = starFighter->getComponent<CombatComponent>();
 
-        m_healthLabel->setLabel(std::to_string(combat->health));
-#endif  // 0
+    m_healthLabel->setLabel(std::to_string(combat->health));
 
-// Render the UI.
-#if 0
-        m_ui->tick(adjustment);
-        m_ui->render(canvas);
-#endif  // 0
+    // Render the UI.
+    m_ui->tick(adjustment);
+    m_ui->render(canvas);
 
     canvas->render();
 
@@ -130,8 +126,8 @@ private:
     color3->setExpand(el::View::ExpandBoth);
     container->addChild(color3);
 
-    // m_healthLabel = new el::LabelView(context, "Testing");
-    // container->addChild(m_healthLabel);
+    m_healthLabel = new el::LabelView(context, "Testing");
+    container->addChild(m_healthLabel);
 
     auto button1 = new el::ButtonView(context, std::string{"Help!"}, nullptr);
     root->addChild(button1);

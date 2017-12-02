@@ -23,11 +23,7 @@ public:
 
   bool create();
 
-#if 0
-    ju::Entity* getPlayerEntity() {
-        return m_entities.getEntity(m_starFighterEntityId);
-    }
-#endif  // 0
+  ju::Entity* getPlayerEntity() { return m_entities.getEntity(m_starFighterEntityId); }
 
   void setViewportSize(const ca::Size<U32>& viewportSize);
   void update(ca::Canvas* canvas, const ca::Size<U32>& viewportSize, F32 adjustment);
@@ -43,9 +39,7 @@ public:
 private:
   nu::ScopedPtr<ca::Texture> createTexture(const nu::FilePath& filename);
 
-#if 0
-    bool spawnStarFighter();
-#endif  // 0
+  bool spawnStarFighter();
 
   bool spawnMouseCursor();
   bool spawnEnemyFighter(const ca::Vec2& pos);
@@ -69,7 +63,7 @@ private:
   nu::ScopedPtr<ca::Texture> m_asteroidTexture;
   nu::ScopedPtr<ca::Texture> m_bargeTexture;
 
-  // ju::EntityId m_starFighterEntityId{ju::kInvalidEntityId};
+  ju::EntityId m_starFighterEntityId{ju::kInvalidEntityId};
   ju::EntityId m_mousePointerEntityId{ju::kInvalidEntityId};
 
   bool m_settingCameraPos{false};

@@ -43,11 +43,9 @@ bool World::create() {
   m_asteroidTexture = createTexture(nu::FilePath{FILE_PATH_LITERAL("C:\\Code\\StarFighter\\assets\\asteroid-1.png")});
   m_bargeTexture = createTexture(nu::FilePath{FILE_PATH_LITERAL("C:\\Code\\StarFighter\\assets\\mining-barge.png")});
 
-#if 0
-    if (!spawnStarFighter()) {
-        return false;
-    }
-#endif  // 0
+  if (!spawnStarFighter()) {
+    return false;
+  }
 
   if (!spawnMouseCursor()) {
     return false;
@@ -171,39 +169,37 @@ nu::ScopedPtr<ca::Texture> World::createTexture(const nu::FilePath& filename) {
   return texture;
 }
 
-#if 0
 bool World::spawnStarFighter() {
-    m_starFighterEntityId = m_entities.createEntity();
-    ju::Entity* entity = m_entities.getEntity(m_starFighterEntityId);
+  m_starFighterEntityId = m_entities.createEntity();
+  ju::Entity* entity = m_entities.getEntity(m_starFighterEntityId);
 
-    // PositionComponent
-    entity->addComponent<PositionComponent>();
+  // PositionComponent
+  entity->addComponent<PositionComponent>();
 
-    // MovementComponent
-    auto movement = entity->addComponent<MovementComponent>();
-    movement->currentSpeed = 0.f;
-    movement->maxSpeed = 5.f;
+  // MovementComponent
+  auto movement = entity->addComponent<MovementComponent>();
+  movement->currentSpeed = 0.f;
+  movement->maxSpeed = 5.f;
 
-    // CollisionComponent
-    auto collision = entity->addComponent<CollisionComponent>();
-    collision->collisionRadius = 32.f;
+  // CollisionComponent
+  auto collision = entity->addComponent<CollisionComponent>();
+  collision->collisionRadius = 32.f;
 
-    // SpriteComponent
-    auto sprite = entity->addComponent<SpriteComponent>();
-    sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_starFighterTexture.get());
+  // SpriteComponent
+  auto sprite = entity->addComponent<SpriteComponent>();
+  sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_starFighterTexture.get());
 
-    // CombatComponent
-    auto combat = entity->addComponent<CombatComponent>();
-    combat->combatMode = CombatComponent::ModePlayer;
-    combat->faction = FactionFriend;
-    combat->fireRate = 0.1f;
-    combat->fireRange = 1000.f;
-    combat->diesOnCollision = false;
-    combat->health = 100000.f;
+  // CombatComponent
+  auto combat = entity->addComponent<CombatComponent>();
+  combat->combatMode = CombatComponent::ModePlayer;
+  combat->faction = FactionFriend;
+  combat->fireRate = 0.1f;
+  combat->fireRange = 1000.f;
+  combat->diesOnCollision = false;
+  combat->health = 100000.f;
 
-    return true;
+  return true;
 }
-#endif  // 0
 
 bool World::spawnMouseCursor() {
   m_mousePointerEntityId = m_entities.createEntity();
