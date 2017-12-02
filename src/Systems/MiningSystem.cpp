@@ -7,6 +7,8 @@
 #include "StarFighter/Components/PositionComponent.h"
 #include "StarFighter/Components/TargetComponent.h"
 
+#include "nucleus/MemoryDebug.h"
+
 void MiningSystem::update(ju::EntityManager& entities, F32 adjustment) {
   for (auto& entity :
        entities.allEntitiesWithComponent<PositionComponent, MovementComponent, MinerComponent, TargetComponent>()) {

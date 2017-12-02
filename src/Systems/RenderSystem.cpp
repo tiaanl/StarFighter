@@ -6,6 +6,8 @@
 #include "StarFighter/Components/SpriteComponent.h"
 #include "canvas/math/transform.h"
 
+#include "nucleus/MemoryDebug.h"
+
 void RenderSystem::configure(ju::EntityManager& events) {
   LOG(Info) << "Configure RenderSystem";
 }

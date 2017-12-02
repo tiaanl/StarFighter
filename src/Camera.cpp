@@ -7,6 +7,8 @@
 
 #include "canvas/math/transform.h"
 
+#include "nucleus/MemoryDebug.h"
+
 void Camera::setPosition(const ca::Pos<F32>& pos) {
   m_pos = pos;
 }

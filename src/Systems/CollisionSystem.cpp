@@ -6,6 +6,8 @@
 #include "StarFighter/Components/CombatComponent.h"
 #include "StarFighter/Components/PositionComponent.h"
 
+#include "nucleus/MemoryDebug.h"
+
 void CollisionSystem::update(ju::EntityManager& entities) {
   // Go through each entity that is ammo and see it it hit something.
   for (auto& ammoEntity : entities.allEntitiesWithComponent<PositionComponent, CollisionComponent, AmmoComponent>()) {

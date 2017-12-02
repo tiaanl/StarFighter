@@ -4,11 +4,13 @@
 #include "StarFighter/UIContext.h"
 #include "StarFighter/World.h"
 #include "canvas/math/transform.h"
+#include "elastic/views/ButtonView.h"
 #include "elastic/views/ColorView.h"
 #include "elastic/views/LabelView.h"
-#include "elastic/views/button_view.h"
 
-class StartFighterApp : public ca::WindowDelegate {
+#include "nucleus/MemoryDebug.h"
+
+class StarFighterApp : public ca::WindowDelegate {
 public:
   bool onWindowCreated() override {
     // We set the first timestamp we have.
@@ -143,4 +145,4 @@ private:
   el::LabelView* m_healthLabel;
 };
 
-CANVAS_APP(StartFighterApp);
+CANVAS_APP(StarFighterApp);

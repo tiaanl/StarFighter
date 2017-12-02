@@ -19,6 +19,8 @@
 #include "canvas/math/transform.h"
 #include "nucleus/streams/file_input_stream.h"
 
+#include "nucleus/MemoryDebug.h"
+
 World::World() : m_entities{}, m_systems{&m_entities} {}
 
 World::~World() {}

@@ -8,6 +8,8 @@
 #include "StarFighter/Components/SpriteComponent.h"
 #include "canvas/math/transform.h"
 
+#include "nucleus/MemoryDebug.h"
+
 void MovementSystem::configure(ju::EntityManager& events) {}
 
 void MovementSystem::update(ju::EntityManager& entities, F32 adjustment) {

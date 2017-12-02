@@ -9,6 +9,8 @@
 #include "StarFighter/Components/SpriteComponent.h"
 #include "canvas/math/transform.h"
 
+#include "nucleus/MemoryDebug.h"
+
 CombatSystem::CombatSystem(nu::ScopedPtr<ca::Texture> bulletTexture) : m_bulletTexture(nu::move(bulletTexture)) {}
 
 void CombatSystem::configure(ju::EntityManager& entities) {
