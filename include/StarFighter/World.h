@@ -23,7 +23,9 @@ public:
 
   bool create();
 
-  ju::Entity* getPlayerEntity() { return m_entities.getEntity(m_starFighterEntityId); }
+  ju::Entity* getPlayerEntity() {
+    return m_entities.getEntity(m_starFighterEntityId);
+  }
 
   void setViewportSize(const ca::Size<U32>& viewportSize);
   void update(ca::Canvas* canvas, const ca::Size<U32>& viewportSize, F32 adjustment);
@@ -45,6 +47,8 @@ private:
   bool spawnEnemyFighter(const ca::Vec2& pos);
   bool spawnAsteroid(const ca::Vec2& pos, F32 direction);
   bool spawnBarge(const ca::Vec2& pos);
+
+  void posessEntity(ju::EntityId id);
 
   ca::Size<U32> m_viewportSize;
 
@@ -68,6 +72,13 @@ private:
 
   bool m_settingCameraPos{false};
   ca::Pos<I32> m_cameraPosStartPos;
+
+  ca::Vec2 m_mouseWorldPos;
+
+  struct PosessedEntity {
+    bool isSettingMovementTarget{false};
+    ju::EntityId id{ju::kInvalidEntityId};
+  } m_posessedEntity;
 
   DISALLOW_COPY_AND_ASSIGN(World);
 };

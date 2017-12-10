@@ -49,6 +49,8 @@ bool World::create() {
     return false;
   }
 
+  posessEntity(m_starFighterEntityId);
+
   if (!spawnMouseCursor()) {
     return false;
   }
@@ -91,10 +93,17 @@ void World::update(ca::Canvas* canvas, const ca::Size<U32>& viewportSize, F32 ad
 
   // Update the mouse position in the world.
   ca::Pos<F32> mousePos(static_cast<F32>(m_mousePosition.x), static_cast<F32>(m_mousePosition.y));
-  ca::Vec2 positionInWorld = m_camera.unproject(m_viewportSize, mousePos);
+  m_mouseWorldPos = m_camera.unproject(m_viewportSize, mousePos);
 
   auto position = m_entities.getComponent<PositionComponent>(m_mousePointerEntityId);
-  position->pos = ca::Vec2{positionInWorld.x, positionInWorld.y};
+  position->pos = ca::Vec2{m_mouseWorldPos.x, m_mouseWorldPos.y};
+
+  if (m_posessedEntity.isSettingMovementTarget) {
+    if (m_posessedEntity.id != ju::kInvalidEntityId) {
+      auto movement = m_entities.getComponent<MovementComponent>(m_posessedEntity.id);
+      movement->moveToPos(m_mouseWorldPos, 100.f);
+    }
+  }
 
   // Decide what each entity wants to do.
   m_systems.update<CombatSystem>(adjustment);
@@ -130,6 +139,11 @@ void World::onMouseMoved(const ca::MouseEvent& evt) {
 }
 
 bool World::onMousePressed(const ca::MouseEvent& evt) {
+  if (evt.button == ca::MouseEvent::Button::Left) {
+    m_posessedEntity.isSettingMovementTarget = true;
+    return true;
+  }
+
   if (evt.button == ca::MouseEvent::Button::Right) {
     // This will be set to true as long as the mouse button is pressed down.
     m_settingCameraPos = true;
@@ -143,6 +157,10 @@ bool World::onMousePressed(const ca::MouseEvent& evt) {
 }
 
 void World::onMouseReleased(const ca::MouseEvent& evt) {
+  if (m_posessedEntity.isSettingMovementTarget && evt.button == ca::MouseEvent::Left) {
+    m_posessedEntity.isSettingMovementTarget = false;
+  }
+
   if (m_settingCameraPos && evt.button == ca::MouseEvent::Right) {
     m_settingCameraPos = false;
   }
@@ -198,7 +216,7 @@ bool World::spawnStarFighter() {
   combat->fireRate = 0.1f;
   combat->fireRange = 1000.f;
   combat->diesOnCollision = false;
-  combat->health = 100000.f;
+  combat->health = 10000.f;
 
   return true;
 }
@@ -285,4 +303,8 @@ bool World::spawnBarge(const ca::Vec2& pos) {
   sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_bargeTexture.get());
 
   return true;
+}
+
+void World::posessEntity(ju::EntityId id) {
+  m_posessedEntity.id = id;
 }

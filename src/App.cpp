@@ -81,14 +81,18 @@ public:
     // Render the world.
     m_world->update(canvas, m_viewportSize, adjustment);
 
+#if 0
     ju::Entity* starFighter = m_world->getPlayerEntity();
     auto combat = starFighter->getComponent<CombatComponent>();
 
     m_healthLabel->setLabel(std::to_string(combat->health));
+#endif  // 0
 
+#if 0
     // Render the UI.
     m_ui->tick(adjustment);
     m_ui->render(canvas);
+#endif  // 0
 
     canvas->render();
 
