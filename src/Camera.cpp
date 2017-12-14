@@ -5,7 +5,7 @@
 #include <math.h>
 #include <algorithm>
 
-#include "canvas/math/transform.h"
+#include "canvas/Math/Transform.h"
 
 #include "nucleus/MemoryDebug.h"
 

@@ -2,7 +2,7 @@
 #ifndef STAR_FIGHTER_UI_CONTEXT_H_
 #define STAR_FIGHTER_UI_CONTEXT_H_
 
-#include "canvas/rendering/font.h"
+#include "canvas/Rendering/Font.h"
 #include "elastic/Context.h"
 #include "nucleus/Memory/ScopedPtr.h"
 

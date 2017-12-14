@@ -16,8 +16,8 @@
 #include "StarFighter/Systems/CombatSystem.h"
 #include "StarFighter/Systems/MovementSystem.h"
 #include "StarFighter/Systems/RenderSystem.h"
-#include "canvas/math/transform.h"
-#include "nucleus/streams/file_input_stream.h"
+#include "canvas/Math/Transform.h"
+#include "nucleus/Streams/FileInputStream.h"
 
 #include "nucleus/MemoryDebug.h"
 
@@ -185,7 +185,7 @@ bool World::create() {
       return nullptr;
     }
 
-    auto texture = nu::MakeScopedPtr<ca::Texture>();
+    auto texture = nu::makeScopedPtr<ca::Texture>();
     texture->createFromImage(image);
 
     return texture;
@@ -209,7 +209,7 @@ bool World::create() {
 
     // SpriteComponent
     auto sprite = entity->addComponent<SpriteComponent>();
-    sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_starFighterTexture.get());
+    sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_starFighterTexture.get());
 
     // CombatComponent
     auto combat = entity->addComponent<CombatComponent>();
@@ -229,7 +229,7 @@ bool World::create() {
     mousePointerEntity->addComponent<PositionComponent>();
 
     auto sprite = mousePointerEntity->addComponent<SpriteComponent>();
-    sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_mousePointerTexture.get());
+    sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_mousePointerTexture.get());
 
     return true;
   }
@@ -251,7 +251,7 @@ bool World::create() {
 
     // SpriteComponent
     auto sprite = entity->addComponent<SpriteComponent>();
-    sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_enemyFighterTexture.get());
+    sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_enemyFighterTexture.get());
     // sprite->movementTarget = nu::MakeScopedPtr<ca::Sprite>(m_movementTargetTexture.get());
 
     // CombatComponent
@@ -278,7 +278,7 @@ bool World::create() {
 
     // SpriteComponent
     auto sprite = entity->addComponent<SpriteComponent>();
-    sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_asteroidTexture.get());
+    sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_asteroidTexture.get());
 
     return true;
   }
@@ -302,7 +302,7 @@ bool World::create() {
 
     // SpriteComponent
     auto sprite = entity->addComponent<SpriteComponent>();
-    sprite->icon = nu::MakeScopedPtr<ca::Sprite>(m_bargeTexture.get());
+    sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_bargeTexture.get());
 
     return true;
   }

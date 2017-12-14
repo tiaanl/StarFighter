@@ -3,8 +3,8 @@
 #define STAR_FIGHTER_COMPONENTS_COMBAT_COMPONENT_H_
 
 #include "StarFighter/Data.h"
-#include "junctions/entity.h"
-#include "nucleus/types.h"
+#include "junctions/Entity.h"
+#include "nucleus/Types.h"
 
 struct CombatComponent {
   enum {

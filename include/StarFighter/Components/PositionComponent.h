@@ -2,8 +2,8 @@
 #ifndef STAR_FIGHTER_COMPONENTS_POSITION_COMPONENT_H_
 #define STAR_FIGHTER_COMPONENTS_POSITION_COMPONENT_H_
 
-#include "canvas/math/vec2.h"
-#include "nucleus/types.h"
+#include "canvas/Math/Vec2.h"
+#include "nucleus/Types.h"
 
 struct PositionComponent {
   // Current position of the entity.

@@ -1,8 +1,8 @@
 
 #include "StarFighter/UIContext.h"
 
-#include "nucleus/files/file_path.h"
-#include "nucleus/streams/file_input_stream.h"
+#include "nucleus/Files/FilePath.h"
+#include "nucleus/Streams/FileInputStream.h"
 
 #include "nucleus/MemoryDebug.h"
 

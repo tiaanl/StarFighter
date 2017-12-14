@@ -2,9 +2,9 @@
 #ifndef STAR_FIGHTER_SYSTEMS_MINING_SYSTEM_H_
 #define STAR_FIGHTER_SYSTEMS_MINING_SYSTEM_H_
 
-#include "canvas/math/vec2.h"
-#include "junctions/entity_manager.h"
-#include "nucleus/types.h"
+#include "canvas/Math/Vec2.h"
+#include "junctions/EntityManager.h"
+#include "nucleus/Types.h"
 
 class MiningSystem {
 public:

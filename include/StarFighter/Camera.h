@@ -2,10 +2,10 @@
 #ifndef STARFIGHTER_CAMERA_H_
 #define STARFIGHTER_CAMERA_H_
 
-#include "canvas/math/mat4.h"
-#include "canvas/utils/pos.h"
-#include "canvas/utils/size.h"
-#include "nucleus/macros.h"
+#include "canvas/Math/Mat4.h"
+#include "canvas/Utils/Pos.h"
+#include "canvas/Utils/Size.h"
+#include "nucleus/Macros.h"
 
 class Camera {
 public:

@@ -4,7 +4,7 @@
 #include "StarFighter/Components/MovementComponent.h"
 #include "StarFighter/Components/PositionComponent.h"
 #include "StarFighter/Components/SpriteComponent.h"
-#include "canvas/math/transform.h"
+#include "canvas/Math/Transform.h"
 
 #include "nucleus/MemoryDebug.h"
 

@@ -2,7 +2,7 @@
 #ifndef STAR_FIGHTER_COMPONENTS_ASTEROID_COMPONENT_H_
 #define STAR_FIGHTER_COMPONENTS_ASTEROID_COMPONENT_H_
 
-#include "nucleus/types.h"
+#include "nucleus/Types.h"
 
 struct AsteroidComponent {
   // The amount of minerals contained inside this asteroid.

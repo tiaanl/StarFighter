@@ -1,9 +1,9 @@
 
-#include "canvas/app.h"
+#include "canvas/App.h"
 #include "StarFighter/Components/CombatComponent.h"
 #include "StarFighter/UIContext.h"
 #include "StarFighter/World.h"
-#include "canvas/math/transform.h"
+#include "canvas/Math/Transform.h"
 #include "elastic/Views/ButtonView.h"
 #include "elastic/Views/ColorView.h"
 #include "elastic/Views/LabelView.h"
@@ -16,12 +16,12 @@ public:
     // We set the first timestamp we have.
     m_lastFrameStartTime = getTimestamp();
 
-    m_world = nu::MakeScopedPtr<World>();
+    m_world = nu::makeScopedPtr<World>();
     if (!m_world->create()) {
       return false;
     }
 
-    m_ui = nu::MakeScopedPtr<UIContext>();
+    m_ui = nu::makeScopedPtr<UIContext>();
     buildUI(m_ui.get());
 
     return true;

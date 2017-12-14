@@ -3,18 +3,18 @@
 #define STAR_FIGHTER_WORLD_H_
 
 #include "StarFighter/Camera.h"
-#include "canvas/math/mat4.h"
-#include "canvas/rendering/canvas.h"
-#include "canvas/rendering/geometry.h"
-#include "canvas/rendering/texture.h"
-#include "canvas/windows/KeyboardEventHandlerInterface.h"
-#include "canvas/windows/MouseEventHandlerInterface.h"
-#include "canvas/windows/event.h"
-#include "junctions/entity_manager.h"
-#include "junctions/system_manager.h"
+#include "canvas/Math/Mat4.h"
+#include "canvas/Rendering/Canvas.h"
+#include "canvas/Rendering/Geometry.h"
+#include "canvas/Rendering/Texture.h"
+#include "canvas/Windows/KeyboardEventHandlerInterface.h"
+#include "canvas/Windows/MouseEventHandlerInterface.h"
+#include "canvas/Windows/Event.h"
+#include "junctions/EntityManager.h"
+#include "junctions/SystemManager.h"
+#include "nucleus/Files/FilePath.h"
 #include "nucleus/Memory/ScopedPtr.h"
 #include "nucleus/Memory/ScopedRefPtr.h"
-#include "nucleus/files/file_path.h"
 
 class World : public ca::MouseEventHandlerInterface, public ca::KeyboardEventHandlerInterface {
 public:

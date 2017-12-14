@@ -2,7 +2,7 @@
 #ifndef STAR_FIGHTER_EVENTS_INPUT_EVENT_H_
 #define STAR_FIGHTER_EVENTS_INPUT_EVENT_H_
 
-#include "junctions/entity_manager.h"
+#include "junctions/EntityManager.h"
 
 struct InputEvent {
   ju::EntityId id;

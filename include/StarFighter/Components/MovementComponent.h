@@ -2,7 +2,7 @@
 #ifndef STAR_FIGHTER_COMPONENTS_MOVEMENT_COMPONENT_H_
 #define STAR_FIGHTER_COMPONENTS_MOVEMENT_COMPONENT_H_
 
-#include "canvas/math/vec2.h"
+#include "canvas/Math/Vec2.h"
 
 struct MovementComponent {
   enum {

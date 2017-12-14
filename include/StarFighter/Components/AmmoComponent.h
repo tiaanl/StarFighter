@@ -3,7 +3,7 @@
 #define STAR_FIGHTER_COMPONENTS_AMMO_COMPONENT_H_
 
 #include "StarFighter/Data.h"
-#include "nucleus/types.h"
+#include "nucleus/Types.h"
 
 struct AmmoComponent {
   // The faction that fired this piece of ammo.

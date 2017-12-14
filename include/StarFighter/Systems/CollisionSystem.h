@@ -2,7 +2,7 @@
 #ifndef STAR_FIGHTER_SYSTEMS_COLLISION_SYSTEM_H_
 #define STAR_FIGHTER_SYSTEMS_COLLISION_SYSTEM_H_
 
-#include "junctions/entity_manager.h"
+#include "junctions/EntityManager.h"
 
 class CollisionSystem {
 public:

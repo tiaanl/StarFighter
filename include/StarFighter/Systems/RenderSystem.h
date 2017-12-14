@@ -2,9 +2,9 @@
 #ifndef STAR_FIGHTER_SYSTEMS_RENDER_SYSTEM_H_
 #define STAR_FIGHTER_SYSTEMS_RENDER_SYSTEM_H_
 
-#include "canvas/math/mat4.h"
-#include "canvas/rendering/canvas.h"
-#include "junctions/entity_manager.h"
+#include "canvas/Math/Mat4.h"
+#include "canvas/Rendering/Canvas.h"
+#include "junctions/EntityManager.h"
 
 class RenderSystem {
 public:

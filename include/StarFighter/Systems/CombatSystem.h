@@ -3,8 +3,8 @@
 #define STAR_FIGHTER_SYSTEMS_COMBAT_SYSTEM_H_
 
 #include "StarFighter/Events/InputEvent.h"
-#include "canvas/rendering/texture.h"
-#include "junctions/entity_manager.h"
+#include "canvas/Rendering/Texture.h"
+#include "junctions/EntityManager.h"
 #include "nucleus/Memory/ScopedPtr.h"
 
 class CombatSystem {
