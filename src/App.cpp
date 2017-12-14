@@ -4,9 +4,9 @@
 #include "StarFighter/UIContext.h"
 #include "StarFighter/World.h"
 #include "canvas/math/transform.h"
-#include "elastic/views/ButtonView.h"
-#include "elastic/views/ColorView.h"
-#include "elastic/views/LabelView.h"
+#include "elastic/Views/ButtonView.h"
+#include "elastic/Views/ColorView.h"
+#include "elastic/Views/LabelView.h"
 
 #include "nucleus/MemoryDebug.h"
 
@@ -101,6 +101,9 @@ public:
 
 private:
   static F64 getTimestamp() {
+#if OS(MACOSX)
+    return 0.0;
+#elif OS(WIN32)
     LARGE_INTEGER time;
     LARGE_INTEGER frequency;
 
@@ -108,6 +111,7 @@ private:
     ::QueryPerformanceCounter(&time);
 
     return static_cast<F64>(time.QuadPart) * 1000000.0 / static_cast<F64>(frequency.QuadPart);
+#endif  // OS(WIN32)
   }
 
   void buildUI(UIContext* context) {

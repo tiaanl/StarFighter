@@ -3,7 +3,7 @@
 #define START_FIGHTER_COMPONENTS_SPRITE_COMPONENT_H_
 
 #include "canvas/Primitives/Sprite.h"
-#include "nucleus/memory/ScopedPtr.h"
+#include "nucleus/Memory/ScopedPtr.h"
 
 struct SpriteComponent {
   nu::ScopedPtr<ca::Sprite> icon;

@@ -3,7 +3,7 @@
 #define STAR_FIGHTER_UI_CONTEXT_H_
 
 #include "canvas/rendering/font.h"
-#include "elastic/context.h"
+#include "elastic/Context.h"
 #include "nucleus/Memory/ScopedPtr.h"
 
 class UIContext : public el::Context {
