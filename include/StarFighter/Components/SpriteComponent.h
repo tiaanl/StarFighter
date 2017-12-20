@@ -6,6 +6,9 @@
 #include "nucleus/Memory/ScopedPtr.h"
 
 struct SpriteComponent {
+  // Is the sprite visible?
+  bool visible{true};
+
   nu::ScopedPtr<ca::Sprite> icon;
   nu::ScopedPtr<ca::Sprite> movementTarget;
 };

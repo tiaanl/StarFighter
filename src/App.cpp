@@ -103,7 +103,7 @@ private:
   static F64 getTimestamp() {
 #if OS(MACOSX)
     return 0.0;
-#elif OS(WIN32)
+#elif OS(WIN)
     LARGE_INTEGER time;
     LARGE_INTEGER frequency;
 

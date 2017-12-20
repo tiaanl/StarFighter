@@ -16,8 +16,13 @@ void RenderSystem::update(ju::EntityManager& entities, ca::Canvas* canvas, const
   // Render all the entities.
   auto view = entities.allEntitiesWithComponent<PositionComponent, SpriteComponent>();
   for (auto& entity : view) {
-    auto position = entity.getComponent<PositionComponent>();
     auto sprite = entity.getComponent<SpriteComponent>();
+
+    if (!sprite->visible) {
+      continue;
+    }
+
+    auto position = entity.getComponent<PositionComponent>();
 
     {
       ca::Mat4 newMat{mat};

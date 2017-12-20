@@ -12,10 +12,14 @@ public:
   Camera() = default;
   ~Camera() = default;
 
-  const ca::Pos<F32>& getPosition() const { return m_pos; }
+  const ca::Pos<F32>& getPosition() const {
+    return m_pos;
+  }
   void setPosition(const ca::Pos<F32>& pos);
 
-  F32 getZoom() const { return m_zoom; }
+  F32 getZoom() const {
+    return m_zoom;
+  }
   void setZoom(F32 m_zoom);
 
   ca::Mat4 calculateMatrix(const ca::Size<U32>& viewportSize) const;
