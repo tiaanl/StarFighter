@@ -399,7 +399,7 @@ ju::EntityId World::getEntityUnderMouse(const ca::Vec2& mouseWorldPos) {
 
     bool inRange = left <= right;
 
-    LOG(Info) << "Checking entity: " << entity.getId() << " (" << left << " <= " << right << ")";
+    // LOG(Info) << "Checking entity: " << entity.getId() << " (" << left << " <= " << right << ")";
 
     if (inRange) {
       return entity.getId();
