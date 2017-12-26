@@ -27,27 +27,27 @@ World::~World() {}
 
 bool World::create() {
 #if OS(WIN)
-  nu::FilePath rootPath{FILE_PATH_LITERAL("C:\\Code\\StarFighter\\assets\\")};
+  nu::FilePath rootPath{"C:\\Code\\StarFighter\\assets\\"};
 #elif OS(MACOSX)
-  nu::FilePath rootPath{FILE_PATH_LITERAL("/Users/tiaan.louw/Code/github.com/tiaanl/StarFighter/assets")};
+  nu::FilePath rootPath{"/Users/tiaan.louw/Code/github.com/tiaanl/StarFighter/assets"};
 #endif
 
   // Add the systems.
-  m_systems.addSystem<CombatSystem>(createTexture(rootPath.append(FILE_PATH_LITERAL("Bullet.png"))));
+  m_systems.addSystem<CombatSystem>(createTexture(rootPath.append("Bullet.png")));
   m_systems.addSystem<MiningSystem>();
   m_systems.addSystem<MovementSystem>();
   m_systems.addSystem<CollisionSystem>();
   m_systems.addSystem<RenderSystem>();
 
   // Load all our textures.
-  m_mousePointerTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("MouseCursor.png")));
-  m_starFighterTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("StarFighter.png")));
-  m_enemyFighterTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("Enemy1.png")));
-  m_movementTargetTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("MovementTarget.png")));
-  m_asteroidTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("asteroid-1.png")));
-  m_bargeTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("mining-barge.png")));
-  m_hoverTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("hover.png")));
-  m_selectedTexture = createTexture(rootPath.append(FILE_PATH_LITERAL("selected.png")));
+  m_mousePointerTexture = createTexture(rootPath.append("MouseCursor.png"));
+  m_starFighterTexture = createTexture(rootPath.append("StarFighter.png"));
+  m_enemyFighterTexture = createTexture(rootPath.append("Enemy1.png"));
+  m_movementTargetTexture = createTexture(rootPath.append("MovementTarget.png"));
+  m_asteroidTexture = createTexture(rootPath.append("asteroid-1.png"));
+  m_bargeTexture = createTexture(rootPath.append("mining-barge.png"));
+  m_hoverTexture = createTexture(rootPath.append("hover.png"));
+  m_selectedTexture = createTexture(rootPath.append("selected.png"));
 
   if (!spawnStarFighter()) {
     return false;
