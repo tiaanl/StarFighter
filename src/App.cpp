@@ -1,12 +1,13 @@
 
 #include "canvas/App.h"
-#include "StarFighter/Components/CombatComponent.h"
 #include "StarFighter/UIContext.h"
 #include "StarFighter/World.h"
 #include "canvas/Math/Transform.h"
+#include "canvas/Resources/ResourceCache.h"
 #include "elastic/Views/ButtonView.h"
 #include "elastic/Views/ColorView.h"
 #include "elastic/Views/LabelView.h"
+#include "nucleus/Utils/Files.h"
 
 #include "nucleus/MemoryDebug.h"
 
@@ -16,7 +17,10 @@ public:
     // We set the first timestamp we have.
     m_lastFrameStartTime = getTimestamp();
 
-    m_world = nu::makeScopedPtr<World>();
+    // Set up the resource cache.
+    m_resourceCache.setRootPath(nu::getCurrentWorkingDirectory().append("assets"));
+
+    m_world = nu::makeScopedPtr<World>(&m_resourceCache);
     if (!m_world->create()) {
       return false;
     }
@@ -146,6 +150,8 @@ private:
   F64 m_lastFrameStartTime{0.f};
 
   ca::Size<U32> m_viewportSize;
+
+  ca::ResourceCache m_resourceCache;
 
   nu::ScopedPtr<World> m_world;
   nu::ScopedPtr<UIContext> m_ui;

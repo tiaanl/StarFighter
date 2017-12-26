@@ -3,17 +3,9 @@
 
 #include <random>
 
-#include "StarFighter/Components/AsteroidComponent.h"
-#include "StarFighter/Components/CollisionComponent.h"
-#include "StarFighter/Components/CombatComponent.h"
-#include "StarFighter/Components/MinerComponent.h"
 #include "StarFighter/Components/MovementComponent.h"
 #include "StarFighter/Components/PositionComponent.h"
 #include "StarFighter/Components/SpriteComponent.h"
-#include "StarFighter/Components/TargetComponent.h"
-#include "StarFighter/Systems/CollisionSystem.h"
-#include "StarFighter/Systems/CombatSystem.h"
-#include "StarFighter/Systems/MiningSystem.h"
 #include "StarFighter/Systems/MovementSystem.h"
 #include "StarFighter/Systems/RenderSystem.h"
 #include "canvas/Math/Transform.h"
@@ -21,33 +13,24 @@
 
 #include "nucleus/MemoryDebug.h"
 
-World::World() : m_entities{}, m_systems{&m_entities} {}
+World::World(ca::ResourceCache* resourceCache) : m_resourceCache(resourceCache), m_entities{}, m_systems{&m_entities} {}
 
 World::~World() {}
 
 bool World::create() {
-#if OS(WIN)
-  nu::FilePath rootPath{"C:\\Code\\StarFighter\\assets\\"};
-#elif OS(MACOSX)
-  nu::FilePath rootPath{"/Users/tiaan.louw/Code/github.com/tiaanl/StarFighter/assets"};
-#endif
-
   // Add the systems.
-  m_systems.addSystem<CombatSystem>(createTexture(rootPath.append("Bullet.png")));
-  m_systems.addSystem<MiningSystem>();
   m_systems.addSystem<MovementSystem>();
-  m_systems.addSystem<CollisionSystem>();
   m_systems.addSystem<RenderSystem>();
 
   // Load all our textures.
-  m_mousePointerTexture = createTexture(rootPath.append("MouseCursor.png"));
-  m_starFighterTexture = createTexture(rootPath.append("StarFighter.png"));
-  m_enemyFighterTexture = createTexture(rootPath.append("Enemy1.png"));
-  m_movementTargetTexture = createTexture(rootPath.append("MovementTarget.png"));
-  m_asteroidTexture = createTexture(rootPath.append("asteroid-1.png"));
-  m_bargeTexture = createTexture(rootPath.append("mining-barge.png"));
-  m_hoverTexture = createTexture(rootPath.append("hover.png"));
-  m_selectedTexture = createTexture(rootPath.append("selected.png"));
+  m_mousePointerTexture = m_resourceCache->getTexture("MouseCursor.png");
+  m_starFighterTexture = m_resourceCache->getTexture("StarFighter.png");
+  m_enemyFighterTexture = m_resourceCache->getTexture("Enemy1.png");
+  m_movementTargetTexture = m_resourceCache->getTexture("MovementTarget.png");
+  m_asteroidTexture = m_resourceCache->getTexture("asteroid-1.png");
+  m_bargeTexture = m_resourceCache->getTexture("mining-barge.png");
+  m_hoverTexture = m_resourceCache->getTexture("hover.png");
+  m_selectedTexture = m_resourceCache->getTexture("selected.png");
 
   if (!spawnStarFighter()) {
     return false;
@@ -131,17 +114,8 @@ void World::update(ca::Canvas* canvas, const ca::Size<U32>& viewportSize, F32 ad
     cursorSprite->visible = false;
   }
 
-  // Decide what each entity wants to do.
-  m_systems.update<CombatSystem>(adjustment);
-
-  // Let the mining system figure out who mines what.
-  m_systems.update<MiningSystem>(adjustment);
-
   // Move each entity into next step position according to what we decided it wants to do.
   m_systems.update<MovementSystem>(adjustment);
-
-  // Check collision between entities that just moved.
-  m_systems.update<CollisionSystem>();
 
   // Render all the entities.
   m_systems.update<RenderSystem>(canvas, mat);
@@ -231,22 +205,9 @@ bool World::spawnStarFighter() {
   movement->currentSpeed = 0.f;
   movement->maxSpeed = 5.f;
 
-  // CollisionComponent
-  auto collision = entity->addComponent<CollisionComponent>();
-  collision->collisionRadius = 32.f;
-
   // SpriteComponent
   auto sprite = entity->addComponent<SpriteComponent>();
-  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_starFighterTexture.get());
-
-  // CombatComponent
-  auto combat = entity->addComponent<CombatComponent>();
-  combat->combatMode = CombatComponent::ModePlayer;
-  combat->faction = FactionFriend;
-  combat->fireRate = 0.1f;
-  combat->fireRange = 1000.f;
-  combat->diesOnCollision = false;
-  combat->health = 10000.f;
+  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_starFighterTexture);
 
   return true;
 }
@@ -257,7 +218,7 @@ bool World::spawnMouseCursor() {
   mousePointerEntity->addComponent<PositionComponent>();
 
   auto sprite = mousePointerEntity->addComponent<SpriteComponent>();
-  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_mousePointerTexture.get());
+  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_mousePointerTexture);
 
   return true;
 }
@@ -274,22 +235,10 @@ bool World::spawnEnemyFighter(const ca::Vec2& pos) {
   auto movement = entity->addComponent<MovementComponent>();
   movement->maxSpeed = 2.5f;
 
-  // CollisionComponent
-  auto collision = entity->addComponent<CollisionComponent>();
-  collision->collisionRadius = 32.f;
-
   // SpriteComponent
   auto sprite = entity->addComponent<SpriteComponent>();
-  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_enemyFighterTexture.get());
+  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_enemyFighterTexture);
   // sprite->movementTarget = nu::MakeScopedPtr<ca::Sprite>(m_movementTargetTexture.get());
-
-  // CombatComponent
-  auto combat = entity->addComponent<CombatComponent>();
-  combat->faction = FactionFoe;
-  combat->diesOnCollision = false;
-  combat->health = 25.f;
-  combat->fireRate = 1.f;
-  combat->fireRange = 500.f;
 
   return true;
 }
@@ -305,12 +254,9 @@ bool World::spawnAsteroid(const ca::Vec2& pos, F32 direction) {
   position->size = 32.f;
   position->selectable = true;
 
-  // AsteroidComponent
-  auto asteroid = entity->addComponent<AsteroidComponent>();
-
   // SpriteComponent
   auto sprite = entity->addComponent<SpriteComponent>();
-  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_asteroidTexture.get());
+  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_asteroidTexture);
 
   return true;
 }
@@ -327,15 +273,9 @@ bool World::spawnBarge(const ca::Vec2& pos) {
   auto movement = entity->addComponent<MovementComponent>();
   movement->maxSpeed = 2.5f;
 
-  // TargetComponent
-  auto target = entity->addComponent<TargetComponent>();
-
-  // MinerComponent
-  auto miner = entity->addComponent<MinerComponent>();
-
   // SpriteComponent
   auto sprite = entity->addComponent<SpriteComponent>();
-  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_bargeTexture.get());
+  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_bargeTexture);
 
   return true;
 }
@@ -348,7 +288,7 @@ ju::EntityId World::spawnHoverEntity() {
   position->pos = ca::Vec2{0.f, 0.f};
 
   auto sprite = entity->addComponent<SpriteComponent>();
-  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_hoverTexture.get());
+  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_hoverTexture);
 
   return id;
 }
@@ -361,7 +301,7 @@ ju::EntityId World::spawnSelectedEntity() {
   position->pos = ca::Vec2{0.f, 0.f};
 
   auto sprite = entity->addComponent<SpriteComponent>();
-  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_selectedTexture.get());
+  sprite->icon = nu::makeScopedPtr<ca::Sprite>(m_selectedTexture);
 
   return id;
 }

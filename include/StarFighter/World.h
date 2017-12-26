@@ -7,6 +7,7 @@
 #include "canvas/Rendering/Canvas.h"
 #include "canvas/Rendering/Geometry.h"
 #include "canvas/Rendering/Texture.h"
+#include "canvas/Resources/ResourceCache.h"
 #include "canvas/Windows/Event.h"
 #include "canvas/Windows/KeyboardEventHandlerInterface.h"
 #include "canvas/Windows/MouseEventHandlerInterface.h"
@@ -18,7 +19,7 @@
 
 class World : public ca::MouseEventHandlerInterface, public ca::KeyboardEventHandlerInterface {
 public:
-  World();
+  explicit World(ca::ResourceCache* resourceCache);
   ~World();
 
   bool create();
@@ -54,6 +55,8 @@ private:
 
   ju::EntityId getEntityUnderMouse(const ca::Vec2& mouseWorldPos);
 
+  ca::ResourceCache* m_resourceCache;
+
   ca::Size<U32> m_viewportSize;
 
   Camera m_camera;
@@ -64,14 +67,14 @@ private:
   ju::SystemManager m_systems;
 
   // Some textures.
-  nu::ScopedPtr<ca::Texture> m_mousePointerTexture;
-  nu::ScopedPtr<ca::Texture> m_starFighterTexture;
-  nu::ScopedPtr<ca::Texture> m_enemyFighterTexture;
-  nu::ScopedPtr<ca::Texture> m_movementTargetTexture;
-  nu::ScopedPtr<ca::Texture> m_asteroidTexture;
-  nu::ScopedPtr<ca::Texture> m_bargeTexture;
-  nu::ScopedPtr<ca::Texture> m_hoverTexture;
-  nu::ScopedPtr<ca::Texture> m_selectedTexture;
+  ca::Texture* m_mousePointerTexture;
+  ca::Texture* m_starFighterTexture;
+  ca::Texture* m_enemyFighterTexture;
+  ca::Texture* m_movementTargetTexture;
+  ca::Texture* m_asteroidTexture;
+  ca::Texture* m_bargeTexture;
+  ca::Texture* m_hoverTexture;
+  ca::Texture* m_selectedTexture;
 
   ju::EntityId m_starFighterEntityId{ju::kInvalidEntityId};
   ju::EntityId m_mousePointerEntityId{ju::kInvalidEntityId};

@@ -1,7 +1,6 @@
 
 #include "StarFighter/Systems/MovementSystem.h"
 
-#include "StarFighter/Components/AmmoComponent.h"
 #include "StarFighter/Components/MovementComponent.h"
 #include "StarFighter/Components/PositionComponent.h"
 #include "StarFighter/Components/SpriteComponent.h"
@@ -33,20 +32,6 @@ void MovementSystem::update(ju::EntityManager& entities, F32 adjustment) {
     if (movement->maxDistanceBeforeDie > 0.f && movement->distanceTravelled > movement->maxDistanceBeforeDie) {
       entity.remove();
     }
-  }
-
-  // Move all ammo.
-  for (auto& ammoEntity : entities.allEntitiesWithComponent<PositionComponent, AmmoComponent>()) {
-    auto position = ammoEntity.getComponent<PositionComponent>();
-    auto ammo = ammoEntity.getComponent<AmmoComponent>();
-
-    F32 dirInRadians = ca::degreesToRadians(position->direction - 90.f);
-
-    // Calculate the next movement step.
-    ca::Vec2 v{std::cos(dirInRadians) * ammo->velocity * adjustment,
-               std::sin(dirInRadians) * ammo->velocity * adjustment};
-
-    position->pos += v;
   }
 }
 
