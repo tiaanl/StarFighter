@@ -7,25 +7,29 @@
 #include "elastic/Views/ButtonView.h"
 #include "elastic/Views/ColorView.h"
 #include "elastic/Views/LabelView.h"
-#include "nucleus/Utils/Files.h"
+#include "nucleus/Files.h"
 
 #include "nucleus/MemoryDebug.h"
 
 class StarFighterApp : public ca::WindowDelegate {
 public:
+  StarFighterApp() : ca::WindowDelegate("Star Fighter") {}
+  ~StarFighterApp() = default;
+
   bool onWindowCreated() override {
     // We set the first timestamp we have.
     m_lastFrameStartTime = getTimestamp();
 
     // Set up the resource cache.
-    m_resourceCache.setRootPath(nu::getCurrentWorkingDirectory().append("assets"));
+    // m_resourceCache.setRootPath(nu::getCurrentWorkingDirectory().append("assets"));
 
-    m_world = nu::makeScopedPtr<World>(&m_resourceCache);
+    // m_world = std::make_unique<World>(&m_resourceCache);
+    m_world = std::make_unique<World>();
     if (!m_world->create()) {
       return false;
     }
 
-    m_ui = nu::makeScopedPtr<UIContext>();
+    m_ui = std::make_unique<UIContext>();
     buildUI(m_ui.get());
 
     return true;
@@ -85,18 +89,9 @@ public:
     // Render the world.
     m_world->update(canvas, m_viewportSize, adjustment);
 
-#if 0
-    ju::Entity* starFighter = m_world->getPlayerEntity();
-    auto combat = starFighter->getComponent<CombatComponent>();
-
-    m_healthLabel->setLabel(std::to_string(combat->health));
-#endif  // 0
-
-#if 0
     // Render the UI.
     m_ui->tick(adjustment);
     m_ui->render(canvas);
-#endif  // 0
 
     canvas->render();
 
@@ -104,6 +99,9 @@ public:
   }
 
 private:
+  COPY_DELETE(StarFighterApp);
+  MOVE_DELETE(StarFighterApp);
+
   static F64 getTimestamp() {
 #if OS(MACOSX)
     return 0.0;
@@ -121,13 +119,13 @@ private:
   void buildUI(UIContext* context) {
     el::GroupView* root = context->getRoot();
 
-    auto color1 = new el::ColorView(context, ca::Color(255, 0, 0));
+    auto color1 = new el::ColorView(context, ca::Color{127, 127, 127});
     color1->setMinSize(ca::Size<I32>{100, 0});
     color1->setExpand(el::View::ExpandVertical);
     color1->setHorizontalAlign(el::View::AlignLeft);
     root->addChild(color1);
 
-    auto color2 = new el::ColorView(context, ca::Color(0, 255, 0));
+    auto color2 = new el::ColorView(context, ca::Color{127, 127, 127});
     color2->setMinSize(ca::Size<I32>{100, 0});
     color2->setExpand(el::View::ExpandVertical);
     color2->setHorizontalAlign(el::View::AlignRight);
@@ -136,12 +134,9 @@ private:
     auto container = new el::StackedSizerView(context);
     root->addChild(container);
 
-    auto color3 = new el::ColorView(context, ca::Color(255, 255, 0));
+    auto color3 = new el::ColorView(context, ca::Color{127, 127, 127});
     color3->setExpand(el::View::ExpandBoth);
     container->addChild(color3);
-
-    m_healthLabel = new el::LabelView(context, "Testing");
-    container->addChild(m_healthLabel);
 
     auto button1 = new el::ButtonView(context, std::string{"Help!"}, nullptr);
     root->addChild(button1);
@@ -151,12 +146,8 @@ private:
 
   ca::Size<U32> m_viewportSize;
 
-  ca::ResourceCache m_resourceCache;
-
-  nu::ScopedPtr<World> m_world;
-  nu::ScopedPtr<UIContext> m_ui;
-
-  el::LabelView* m_healthLabel;
+  std::unique_ptr<World> m_world;
+  std::unique_ptr<UIContext> m_ui;
 };
 
 CANVAS_APP(StarFighterApp);

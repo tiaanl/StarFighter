@@ -2,6 +2,7 @@
 #ifndef STAR_FIGHTER_COMPONENTS_MOVEMENT_COMPONENT_H_
 #define STAR_FIGHTER_COMPONENTS_MOVEMENT_COMPONENT_H_
 
+#if 0
 #include "canvas/Math/Vec2.h"
 
 struct MovementComponent {
@@ -51,5 +52,7 @@ struct MovementComponent {
     currentSpeed = speed;
   }
 };
+
+#endif  // 0
 
 #endif  // STAR_FIGHTER_COMPONENTS_MOVEMENT_COMPONENT_H_

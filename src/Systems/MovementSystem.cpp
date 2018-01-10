@@ -1,6 +1,8 @@
 
 #include "StarFighter/Systems/MovementSystem.h"
 
+#if 0
+
 #include "StarFighter/Components/MovementComponent.h"
 #include "StarFighter/Components/PositionComponent.h"
 #include "StarFighter/Components/SpriteComponent.h"
@@ -87,3 +89,5 @@ void MovementSystem::handleFollowEntity(ju::EntityManager& entities, ju::Entity&
 
   handleMoveToPosition(entities, entity, adjustment);
 }
+
+#endif  // 0

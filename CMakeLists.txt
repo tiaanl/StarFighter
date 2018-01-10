@@ -10,7 +10,6 @@ set(CMAKE_CXX_STANDARD 14)
 # Dependencies
 
 include(cmake/elastic.cmake)
-include(cmake/junctions.cmake)
 
 set("StarFighter_INCLUDE_FILES"
         "include/StarFighter/Camera.h"
@@ -36,5 +35,5 @@ set("StarFighter_SOURCE_FILES"
 
 add_executable(StarFighter WIN32 ${StarFighter_INCLUDE_FILES} ${StarFighter_SOURCE_FILES})
 target_include_directories(StarFighter PRIVATE "include")
-target_link_libraries(StarFighter canvas elastic junctions)
+target_link_libraries(StarFighter canvas elastic)
 target_include_directories(StarFighter PRIVATE "${PROJECT_SOURCE_DIR}/include")

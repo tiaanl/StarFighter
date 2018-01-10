@@ -1,6 +1,8 @@
 
 #include "StarFighter/Systems/RenderSystem.h"
 
+#if 0
+
 #include "StarFighter/Components/MovementComponent.h"
 #include "StarFighter/Components/PositionComponent.h"
 #include "StarFighter/Components/SpriteComponent.h"
@@ -43,3 +45,5 @@ void RenderSystem::update(ju::EntityManager& entities, ca::Canvas* canvas, const
     }
   }
 }
+
+#endif  // 0
