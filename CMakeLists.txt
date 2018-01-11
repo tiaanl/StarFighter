@@ -13,15 +13,18 @@ include(cmake/elastic.cmake)
 
 set("StarFighter_INCLUDE_FILES"
         "include/StarFighter/Camera.h"
-        "include/StarFighter/Data.h"
-        "include/StarFighter/UIContext.h"
-        "include/StarFighter/World.h"
+        "include/StarFighter/Components/Component.h"
+        "include/StarFighter/Components/MovementComponent.h"
         "include/StarFighter/Components/PositionComponent.h"
         "include/StarFighter/Components/SpriteComponent.h"
-        "include/StarFighter/Components/MovementComponent.h"
+        "include/StarFighter/Data.h"
+        "include/StarFighter/Entity.h"
         "include/StarFighter/Events/InputEvent.h"
-        "include/StarFighter/Systems/RenderSystem.h"
         "include/StarFighter/Systems/MovementSystem.h"
+        "include/StarFighter/Systems/RenderSystem.h"
+        "include/StarFighter/Transform.h"
+        "include/StarFighter/UIContext.h"
+        "include/StarFighter/World.h"
         )
 
 set("StarFighter_SOURCE_FILES"

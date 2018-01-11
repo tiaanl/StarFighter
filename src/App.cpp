@@ -24,56 +24,54 @@ public:
     // m_resourceCache.setRootPath(nu::getCurrentWorkingDirectory().append("assets"));
 
     // m_world = std::make_unique<World>(&m_resourceCache);
-    m_world = std::make_unique<World>();
-    if (!m_world->create()) {
+    if (!m_world.create()) {
       return false;
     }
 
-    m_ui = std::make_unique<UIContext>();
-    buildUI(m_ui.get());
+    buildUI(&m_ui);
 
     return true;
   }
 
   void onWindowResized(const ca::Size<U32>& size) override {
     m_viewportSize = size;
-    m_world->setViewportSize(size);
+    m_world.setViewportSize(size);
   }
 
   void onMouseMoved(const ca::MouseEvent& evt) override {
     ca::WindowDelegate::onMouseMoved(evt);
 
-    m_world->onMouseMoved(evt);
+    m_world.onMouseMoved(evt);
   }
 
   void onMousePressed(const ca::MouseEvent& evt) override {
     ca::WindowDelegate::onMousePressed(evt);
 
-    m_world->onMousePressed(evt);
+    m_world.onMousePressed(evt);
   }
 
   void onMouseReleased(const ca::MouseEvent& evt) override {
     ca::WindowDelegate::onMouseReleased(evt);
 
-    m_world->onMouseReleased(evt);
+    m_world.onMouseReleased(evt);
   }
 
   void onMouseWheel(const ca::MouseWheelEvent& evt) override {
     ca::WindowDelegate::onMouseWheel(evt);
 
-    m_world->onMouseWheel(evt);
+    m_world.onMouseWheel(evt);
   }
 
   void onKeyPressed(const ca::KeyEvent& evt) override {
     ca::WindowDelegate::onKeyPressed(evt);
 
-    m_world->onKeyPressed(evt);
+    m_world.onKeyPressed(evt);
   }
 
   void onKeyReleased(const ca::KeyEvent& evt) override {
     ca::WindowDelegate::onKeyReleased(evt);
 
-    m_world->onKeyReleased(evt);
+    m_world.onKeyReleased(evt);
   }
 
   void onPaint(ca::Canvas* canvas) override {
@@ -87,11 +85,12 @@ public:
     canvas->clear(ca::Color(0, 0, 0));
 
     // Render the world.
-    m_world->update(canvas, m_viewportSize, adjustment);
+    m_world.update(adjustment);
+    m_world.render(canvas);
 
     // Render the UI.
-    m_ui->tick(adjustment);
-    m_ui->render(canvas);
+    m_ui.tick(adjustment);
+    m_ui.render(canvas);
 
     canvas->render();
 
@@ -142,12 +141,12 @@ private:
     root->addChild(button1);
   }
 
-  F64 m_lastFrameStartTime{0.f};
+  F64 m_lastFrameStartTime = 0.f;
 
   ca::Size<U32> m_viewportSize;
 
-  std::unique_ptr<World> m_world;
-  std::unique_ptr<UIContext> m_ui;
+  World m_world;
+  UIContext m_ui;
 };
 
 CANVAS_APP(StarFighterApp);

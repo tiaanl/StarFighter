@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "StarFighter/Camera.h"
+#include "StarFighter/Entity.h"
 #include "canvas/Math/Mat4.h"
 #include "canvas/Rendering/Canvas.h"
 #include "canvas/Rendering/Geometry.h"
@@ -17,13 +18,15 @@
 
 class World : public ca::MouseEventHandlerInterface, public ca::KeyboardEventHandlerInterface {
 public:
-  explicit World() = default;
+  World() = default;
   ~World() = default;
 
   bool create();
 
   void setViewportSize(const ca::Size<U32>& viewportSize);
-  void update(ca::Canvas* canvas, const ca::Size<U32>& viewportSize, F32 adjustment);
+
+  void update(F32 adjustment);
+  void render(ca::Canvas* canvas);
 
   void onMouseMoved(const ca::MouseEvent& evt) override;
   bool onMousePressed(const ca::MouseEvent& evt) override;
@@ -42,15 +45,17 @@ private:
 
   ca::Pos<I32> m_mousePosition;
 
+  std::vector<Entity> m_entities;
+
   // Some textures.
-  ca::Texture* m_mousePointerTexture;
-  ca::Texture* m_starFighterTexture;
-  ca::Texture* m_enemyFighterTexture;
-  ca::Texture* m_movementTargetTexture;
-  ca::Texture* m_asteroidTexture;
-  ca::Texture* m_bargeTexture;
-  ca::Texture* m_hoverTexture;
-  ca::Texture* m_selectedTexture;
+  std::unique_ptr<ca::Texture> m_mousePointerTexture;
+  std::unique_ptr<ca::Texture> m_starFighterTexture;
+  std::unique_ptr<ca::Texture> m_enemyFighterTexture;
+  std::unique_ptr<ca::Texture> m_movementTargetTexture;
+  std::unique_ptr<ca::Texture> m_asteroidTexture;
+  std::unique_ptr<ca::Texture> m_bargeTexture;
+  std::unique_ptr<ca::Texture> m_hoverTexture;
+  std::unique_ptr<ca::Texture> m_selectedTexture;
 
   ca::Vec2 m_mouseWorldPos;
 
