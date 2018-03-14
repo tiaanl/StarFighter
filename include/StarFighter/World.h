@@ -15,6 +15,7 @@
 #include "canvas/Windows/KeyboardEventHandlerInterface.h"
 #include "canvas/Windows/MouseEventHandlerInterface.h"
 #include "nucleus/FilePath.h"
+#include "nucleus/Memory/Ptr.h"
 
 class World : public ca::MouseEventHandlerInterface, public ca::KeyboardEventHandlerInterface {
 public:
@@ -37,7 +38,7 @@ public:
   void onKeyReleased(const ca::KeyEvent& evt) override;
 
 private:
-  std::unique_ptr<ca::Texture> createTexture(const nu::FilePath& filename);
+  nu::Ptr<ca::Texture> createTexture(const nu::FilePath& filename);
 
   ca::Size<U32> m_viewportSize;
 
@@ -45,17 +46,17 @@ private:
 
   ca::Pos<I32> m_mousePosition;
 
-  std::vector<Entity> m_entities;
+  nu::DynamicArray<Entity> m_entities;
 
   // Some textures.
-  std::unique_ptr<ca::Texture> m_mousePointerTexture;
-  std::unique_ptr<ca::Texture> m_starFighterTexture;
-  std::unique_ptr<ca::Texture> m_enemyFighterTexture;
-  std::unique_ptr<ca::Texture> m_movementTargetTexture;
-  std::unique_ptr<ca::Texture> m_asteroidTexture;
-  std::unique_ptr<ca::Texture> m_bargeTexture;
-  std::unique_ptr<ca::Texture> m_hoverTexture;
-  std::unique_ptr<ca::Texture> m_selectedTexture;
+  nu::Ptr<ca::Texture> m_mousePointerTexture;
+  nu::Ptr<ca::Texture> m_starFighterTexture;
+  nu::Ptr<ca::Texture> m_enemyFighterTexture;
+  nu::Ptr<ca::Texture> m_movementTargetTexture;
+  nu::Ptr<ca::Texture> m_asteroidTexture;
+  nu::Ptr<ca::Texture> m_bargeTexture;
+  nu::Ptr<ca::Texture> m_hoverTexture;
+  nu::Ptr<ca::Texture> m_selectedTexture;
 
   ca::Vec2 m_mouseWorldPos;
 

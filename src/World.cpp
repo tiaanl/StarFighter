@@ -1,7 +1,6 @@
 
 #include "StarFighter/World.h"
 
-#include <filesystem>
 #include <random>
 
 #include "StarFighter/Components/MovementComponent.h"
@@ -30,8 +29,8 @@ bool World::create() {
   m_selectedTexture = createTexture(nu::FilePath{"selected.png"});
 #endif  // 0
 
-  m_entities.emplace_back();
-  Entity& last = m_entities.back();
+  m_entities.emplaceBack();
+  Entity& last = m_entities.last();
   last.transform().rot = ca::Vec3{0.f, 0.f, 30.f};
 
   auto sprite1 = last.emplaceComponent<SpriteComponent>();
@@ -102,7 +101,7 @@ void World::onKeyPressed(const ca::KeyEvent& evt) {}
 
 void World::onKeyReleased(const ca::KeyEvent& evt) {}
 
-std::unique_ptr<ca::Texture> World::createTexture(const nu::FilePath& filename) {
+nu::Ptr<ca::Texture> World::createTexture(const nu::FilePath& filename) {
   nu::FilePath root = nu::getCurrentWorkingDirectory().append(nu::FilePath{"assets"});
 
   nu::FileInputStream stream(root.append(filename));
@@ -110,10 +109,10 @@ std::unique_ptr<ca::Texture> World::createTexture(const nu::FilePath& filename) 
   ca::Image image;
   if (!image.loadFromStream(&stream)) {
     LOG(Warning) << "Could not load image.";
-    return nullptr;
+    return nu::Ptr<ca::Texture>{};
   }
 
-  auto texture = std::make_unique<ca::Texture>();
+  auto texture = nu::makePtr<ca::Texture>();
   texture->createFromImage(image);
 
   return texture;

@@ -6,6 +6,8 @@
 
 #include "nucleus/MemoryDebug.h"
 
+UIContext::UIContext(ca::ResourceManager* resourceManager) : el::Context(resourceManager) {}
+
 ca::Font* UIContext::getFont(const std::string& name) {
   if (!m_font) {
 #if OS(WIN)

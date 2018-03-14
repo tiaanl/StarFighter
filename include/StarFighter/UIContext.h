@@ -9,7 +9,7 @@
 
 class UIContext : public el::Context {
 public:
-  UIContext() = default;
+  explicit UIContext(ca::ResourceManager* resourceManager);
   ~UIContext() = default;
 
   ca::Font* getFont(const std::string& name) override;

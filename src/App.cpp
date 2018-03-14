@@ -13,7 +13,8 @@
 
 class StarFighterApp : public ca::WindowDelegate {
 public:
-  StarFighterApp() : ca::WindowDelegate("Star Fighter") {}
+  StarFighterApp()
+    : ca::WindowDelegate("Star Fighter"), m_resourceManager(nu::getDefaultAllocator()), m_ui(&m_resourceManager) {}
   ~StarFighterApp() = default;
 
   bool onWindowCreated() override {
@@ -103,7 +104,7 @@ private:
 
   static F64 getTimestamp() {
 #if OS(MACOSX)
-    return 0.0;
+    return 1.0;
 #elif OS(WIN)
     LARGE_INTEGER time;
     LARGE_INTEGER frequency;
@@ -146,6 +147,7 @@ private:
   ca::Size<U32> m_viewportSize;
 
   World m_world;
+  ca::ResourceManager m_resourceManager;
   UIContext m_ui;
 };
 
